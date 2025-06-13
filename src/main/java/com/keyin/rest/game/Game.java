@@ -2,10 +2,7 @@ package com.keyin.rest.game;
 
 import com.keyin.rest.division.Division;
 import com.keyin.rest.team.Team;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.*;
 
 import java.util.Calendar;
 
@@ -16,10 +13,17 @@ public class Game {
     @SequenceGenerator(name = "game_sequence", sequenceName = "game_sequence", allocationSize = 1, initialValue = 1)
     @GeneratedValue(generator = "game_sequence")
     private long id;
+
+    @ManyToOne
     private Team homeTeam;
+
+    @ManyToOne
     private Team awayTeam;
+
     private String location;
+
     private Calendar gameDay;
+
     private Division divisionPlay;
 
 
