@@ -1,17 +1,15 @@
 package com.keyin.rest.game;
 
-import com.keyin.rest.division.Division;
 import com.keyin.rest.team.Team;
 import jakarta.persistence.*;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 @Entity
 public class Game {
-
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "game_sequence")
     @SequenceGenerator(name = "game_sequence", sequenceName = "game_sequence", allocationSize = 1, initialValue = 1)
-    @GeneratedValue(generator = "game_sequence")
     private long id;
 
     @ManyToOne
@@ -22,18 +20,12 @@ public class Game {
 
     private String location;
 
-    private Calendar gameDay;
+    private LocalDateTime scheduledDate;
 
-    private Division divisionPlay;
+    // Getters and setters
+    public long getId() {return id; }
 
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+    public void setId(long id) {this.id = id; }
 
     public Team getHomeTeam() {return homeTeam; }
 
@@ -47,13 +39,10 @@ public class Game {
 
     public void setLocation(String location) {this.location = location; }
 
-    public Calendar getGameDay() {return gameDay; }
+    public LocalDateTime getScheduledDate() {return scheduledDate; }
 
-    public void setAwayGameDay(Calendar gameDay) {this.gameDay = gameDay; }
-
-
+    public void setScheduledDate(LocalDateTime scheduledDate) {this.scheduledDate = scheduledDate; }
 }
-
 
 
 
