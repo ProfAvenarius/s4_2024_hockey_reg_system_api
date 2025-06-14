@@ -1,3 +1,9 @@
+//Description: This initializes the database with some test data
+//Author: DC Elliott
+//Date: Jun 13/2025
+
+
+
 package com.keyin.rest;
 
 import com.keyin.rest.division.Division;
@@ -16,6 +22,9 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+
+//The ease with which this Component annotation and CommandLineRunner interface allow the test data
+//to be uploaded made me understand why Spring is popular.
 @Component
 public class DataLoader implements CommandLineRunner {
 
@@ -59,27 +68,27 @@ public class DataLoader implements CommandLineRunner {
         babe.setFirstName("Babe");
         babe.setLastName("Ruth");
         Calendar dob2 = Calendar.getInstance();
-        dob2.set(2008, Calendar.JUNE, 22);
+        dob2.set(2008, Calendar.JULY, 22);
         babe.setBirthday(dob2);
         playerRepo.save(babe);
 
         // Load Teams
-        Team wolves = new Team();
-        wolves.setName("Wolves");
-        wolves.setDivision(bantam);
-        wolves.setPlayers(List.of(mark));
-        teamRepo.save(wolves);
+        Team yankees = new Team();
+        yankees.setName("Yankees");
+        yankees.setDivision(bantam);
+        yankees.setPlayers(List.of(mark));
+        teamRepo.save(yankees);
 
-        Team bears = new Team();
-        bears.setName("Bears");
-        bears.setDivision(midget);
-        bears.setPlayers(List.of(babe));
-        teamRepo.save(bears);
+        Team dodgers = new Team();
+        dodgers.setName("Dodgers");
+        dodgers.setDivision(midget);
+        dodgers.setPlayers(List.of(babe));
+        teamRepo.save(dodgers);
 
         // Load Game
         Game game = new Game();
-        game.setHomeTeam(wolves);
-        game.setAwayTeam(bears);
+        game.setHomeTeam(yankees);
+        game.setAwayTeam(dodgers);
         game.setLocation("Downtown Arena");
         game.setScheduledDate(LocalDateTime.of(2025, 6, 15, 19, 0));
         gameRepo.save(game);

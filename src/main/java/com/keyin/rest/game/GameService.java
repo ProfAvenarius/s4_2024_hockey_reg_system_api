@@ -1,3 +1,9 @@
+//Description: Again mirrored from existing classes, has the basic functionality plus
+// the additional methods required for the added GET calls, PUT and DELETE routes.
+//Author: DC Elliott
+//Date: Jun 13/2025
+
+
 package com.keyin.rest.game;
 
 import org.springframework.beans.factory.annotation.Autowired;

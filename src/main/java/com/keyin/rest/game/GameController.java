@@ -1,3 +1,8 @@
+//Description: THe controller for Game. Basic functionality prescribed in assignment with added
+//             routes found in other object controllers: additional GET calls, PUT and DELETE
+//Author: DC Elliott
+//Date: Jun 13/2025
+
 package com.keyin.rest.game;
 
 import com.keyin.rest.dto.GameDTO;
@@ -12,10 +17,15 @@ public class GameController {
     @Autowired
     private GameService gameService;
 
-//    @GetMapping("/game")
-//    public List<Game> getAllGames() {
-//        return gameService.getAllGames();
-//    }
+
+    //The general GET returns a DTO object to clean up the list of multiple games.
+    @GetMapping("/game")
+    public List<GameDTO> getAllGames() {
+        return gameService.getAllGames()
+                .stream()
+                .map(GameDTO::new)
+                .toList();
+    }
 
     @GetMapping("/game/{id}")
     public Game getGameById(@PathVariable long id) {
@@ -25,14 +35,6 @@ public class GameController {
     @GetMapping("/game_search")
     public List<Game> searchGamesByLocation(@RequestParam String location) {
         return gameService.getGamesByLocation(location);
-    }
-
-    @GetMapping("/game")
-    public List<GameDTO> getAllGames() {
-        return gameService.getAllGames()
-                .stream()
-                .map(GameDTO::new)
-                .toList();
     }
 
 

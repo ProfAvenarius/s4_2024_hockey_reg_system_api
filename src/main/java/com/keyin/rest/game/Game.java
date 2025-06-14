@@ -1,3 +1,8 @@
+//Description: The POJO of Game. Mirrors the design of the other object classes
+//Author: DC Elliott
+//Date: Jun 13/2025
+
+
 package com.keyin.rest.game;
 
 import com.keyin.rest.team.Team;
