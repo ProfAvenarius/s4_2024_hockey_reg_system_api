@@ -1,35 +1,37 @@
+//Description: The POJO of Game. Mirrors the design of the other object classes
+//Author: DC Elliott
+//Date: Jun 13/2025
+
+
 package com.keyin.rest.game;
 
-import com.keyin.rest.division.Division;
 import com.keyin.rest.team.Team;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.*;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 
 @Entity
 public class Game {
-
     @Id
     @SequenceGenerator(name = "game_sequence", sequenceName = "game_sequence", allocationSize = 1, initialValue = 1)
     @GeneratedValue(generator = "game_sequence")
+
     private long id;
+
+    @ManyToOne
     private Team homeTeam;
+
+    @ManyToOne
     private Team awayTeam;
+
     private String location;
-    private Calendar gameDay;
-    private Division divisionPlay;
 
+    private LocalDateTime scheduledDate;
 
-    public long getId() {
-        return id;
-    }
+    // Getters and setters
+    public long getId() {return id; }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+    public void setId(long id) {this.id = id; }
 
     public Team getHomeTeam() {return homeTeam; }
 
@@ -43,13 +45,10 @@ public class Game {
 
     public void setLocation(String location) {this.location = location; }
 
-    public Calendar getGameDay() {return gameDay; }
+    public LocalDateTime getScheduledDate() {return scheduledDate; }
 
-    public void setAwayGameDay(Calendar gameDay) {this.gameDay = gameDay; }
-
-
+    public void setScheduledDate(LocalDateTime scheduledDate) {this.scheduledDate = scheduledDate; }
 }
-
 
 
 
