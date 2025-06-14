@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GameService {
@@ -14,8 +15,37 @@ public class GameService {
         return (List<Game>) gameRepository.findAll();
     }
 
+    public Game getGameById(long id) {
+        return gameRepository.findById(id).orElse(null);
+    }
+
     public Game createGame(Game newGame) {
         return gameRepository.save(newGame);
     }
+
+    public Game updateGame(long id, Game updatedGame) {
+        Optional<Game> optionalGame = gameRepository.findById(id);
+
+        if (optionalGame.isPresent()) {
+            Game existing = optionalGame.get();
+            existing.setHomeTeam(updatedGame.getHomeTeam());
+            existing.setAwayTeam(updatedGame.getAwayTeam());
+            existing.setLocation(updatedGame.getLocation());
+            existing.setScheduledDate(updatedGame.getScheduledDate());
+            return gameRepository.save(existing);
+        }
+
+        return null;
+    }
+
+    public void deleteGame(long id) {
+        gameRepository.deleteById(id);
+    }
+
+    public List<Game> getGamesByLocation(String location) {
+        return gameRepository.findByLocationContainingIgnoreCase(location);
+    }
+
+
 }
 
