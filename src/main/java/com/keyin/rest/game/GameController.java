@@ -1,5 +1,6 @@
 package com.keyin.rest.game;
 
+import com.keyin.rest.dto.GameDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,10 +12,10 @@ public class GameController {
     @Autowired
     private GameService gameService;
 
-    @GetMapping("/game")
-    public List<Game> getAllGames() {
-        return gameService.getAllGames();
-    }
+//    @GetMapping("/game")
+//    public List<Game> getAllGames() {
+//        return gameService.getAllGames();
+//    }
 
     @GetMapping("/game/{id}")
     public Game getGameById(@PathVariable long id) {
@@ -25,6 +26,15 @@ public class GameController {
     public List<Game> searchGamesByLocation(@RequestParam String location) {
         return gameService.getGamesByLocation(location);
     }
+
+    @GetMapping("/game")
+    public List<GameDTO> getAllGames() {
+        return gameService.getAllGames()
+                .stream()
+                .map(GameDTO::new)
+                .toList();
+    }
+
 
     @PostMapping("/game")
     public Game createGame(@RequestBody Game game) {
